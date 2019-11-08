@@ -1,13 +1,9 @@
-class StudentRec:
-   def __init__(self,stId,stname,coursecode):
+class StudentRec:    
+    def __init__(self,stId,stname,coursecode):
         self.stId=stId
         self.stname=stname
         self.coursecode=coursecode
-    # def addData(self):
-    #     self.stId=int(input("Enter student id :\t"))
-    #     self.stname = input("Enter Name:\t")        
-    #     self.coursecode = int(input("Enter coursecode:\t"))
-   def retrieve(self):
+    def showall(self):
         print(self.stId,end='\t\t')
         print(self.stname,end='\t\t')
         print(self.coursecode)
@@ -20,7 +16,13 @@ for i in range(n):
     stname=input('\tName:')
     coursecode=input('\tCourseCode:')
     st.append(StudentRec(stId,stname,coursecode))
+for i in range(n):
+    for j in range(i+1,n):
+        if(st[i].stId>st[j].stId):
+            tmp=st[i]
+            st[i]=st[j]
+            st[j]=tmp
 print('Student Information')
 print('ID\t\tName\t\tCourseCode')
 for i in range(n):
-    st[i].retrieve()
+    st[i].showall()
