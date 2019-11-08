@@ -3,18 +3,24 @@ class StudentRec:
         self.stId=stId
         self.stname=stname
         self.coursecode=coursecode
-    def addData(self):
-        self.stId=int(input("Enter IDno:\t"))
-        self.stname = input("Enter Name:\t")
-        self.coursecode = int(input("Enter corsecode:\t"))
-    def retrieve(self):
-        print("ID\t:",self.stId)
-        print("Name\t:", self.stname)
-        print("CourseCode\t:", self.coursecode)
-def main():
-    s1=StudentRec()
-    s1.addData()
-    s1.retrieve()
-if __name__=="__main__":
-    main()
-
+    # def addData(self):
+    #     self.stId=int(input("Enter student id :\t"))
+    #     self.stname = input("Enter Name:\t")        
+    #     self.coursecode = int(input("Enter coursecode:\t"))
+   def retrieve(self):
+        print(self.stId,end='\t\t')
+        print(self.stname,end='\t\t')
+        print(self.coursecode)
+st=list()
+n=int(input('Enter no of students : '))
+print('Students details entry....')
+for i in range(n):
+    print('Student : ',i+1)
+    stId=input('\tID:')
+    stname=input('\tName:')
+    coursecode=input('\tCourseCode:')
+    st.append(StudentRec(stId,stname,coursecode))
+print('Student Information')
+print('ID\t\tName\t\tCourseCode')
+for i in range(n):
+    st[i].retrieve()
