@@ -1,1 +1,14 @@
+class StudentRec:
+    __stId=0
+    __stname=""
+    __coursecode="" 
+    def addData(self):
+        self.__stId=int(input("Enter IDno:\t"))
+        self.__stname = input("Enter Name:\t")
+        self.__coursecode = int(input("Enter corsecode:\t"))
+    def main():
+        s1=StudentRec()
+        s1.addData()
+    if __name__=="__main__":
+        main()
 
