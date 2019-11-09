@@ -1,3 +1,5 @@
+import time
+import math
 class StudentRec:    
     def __init__(self,stId,stname,coursecode):
         self.stId=stId
@@ -9,30 +11,43 @@ class StudentRec:
         print(self.stname,end='\t\t')
         print(self.coursecode)
 
-class StudentHandler:
+class StudentHandler:    
     def sort(self,st):
         for i in range(len(st)):
             for j in range(i+1,len(st)):
                 if(int(st[i].stId)>int(st[j].stId)):
                     tmp=st[i]
                     st[i]=st[j]
-                    st[j]=tmp
+                    st[j]=tmp       
         
+
+st=list()
+while(True):
+    choice=int(input("1: To add students\n 2: View all students\n 3:See the latest entry"))
+    if choice==1:
+        n=int(input('Enter no of students : '))
+        print('Students details entry....')
+        for i in range(n):
+            print('Student : ',i+1)
+            stId=int(input('\tID:'))
+            #digits = int(math.log10(stId))+1
+            while(not (int(math.log10(stId))+1)==8):
+                print("\n *Id must be 8 characters long.")
+                stId=int(input('\tID:'))
+            stname=input('\tName:')
+            coursecode=input('\tCourseCode:')
+            while(not len(coursecode)==7):
+                print("\n *The course id must be 7 characters long.")
+                coursecode=input('\tCourseCode:')
+            st.append(StudentRec(stId,stname,coursecode))
+        sh=StudentHandler()
+        start=time.time()
+        st=sh.sort(st)
+        print(time.time()-start)
+        
+    elif choice==2:
         print('Student Information')
         print('ID\t\tName\t\tCourseCode')
         for i in range(n):
-            st[i].showall()
-        return st
+            st[i].showall()      
 
-st=list()
-n=int(input('Enter no of students : '))
-print('Students details entry....')
-for i in range(n):
-    print('Student : ',i+1)
-    stId=input('\tID:')
-    stname=input('\tName:')
-    coursecode=input('\tCourseCode:')
-    st.append(StudentRec(stId,stname,coursecode))
-
-sh=StudentHandler()
-st=sh.sort(st)
