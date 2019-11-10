@@ -1,4 +1,7 @@
-
+import time
+import math
+import re
+st=list()
 class StudentRec:    
     def __init__(self,stId,stname,coursecode):
         self.stId=stId
@@ -19,13 +22,11 @@ class StudentHandler:
         for i in range(len(st)):
             for j in range(i+1,len(st)):
                 if(int(st[i].stId)>int(st[j].stId)):
-                    tmp=st[i]
-                    st[i]=st[j]
-                    st[j]=tmp       
+                    st[i],st[j]=st[j],st[i]
+        return st
         
 
-st=list()
-student=StudentHandler()
+stud=StudentHandler()
 while(True):
     choice=int(input(" 1: To add students\n 2: View all students\n 3:See the latest entry"))
     if choice==1:
@@ -36,7 +37,12 @@ while(True):
         for i in range(n):
             print('Student : ',i+1)
             stId=input('\tID:')
-                            
+            check=re.match("[0-9]{8}$",stId)
+            while(not check):             
+                print("\n Id must be 8 integers.")
+                stId=input('\tID:')
+                check=re.match("[0-9]{8}$",stId)
+                
             stname=input('\tName:')
             
             coursecode=input('\tCourseCode:')
@@ -44,12 +50,12 @@ while(True):
                 print("\n The course id must be 7 characters long.")
                 coursecode=input('\tCourseCode:')
             std=(StudentRec(stId,stname,coursecode))
-            student.add(std)
+            stud.add(std)
         #sh=StudentHandler()
         #start=time.time()
-        #st=sh.sort(student)
+        st=stud.sort(st)
         #print(time.time()-start)
-        
+        print()
     elif choice==2:
         print('Student Information')
         print('ID\t\tName\t\tCourseCode')
@@ -57,4 +63,10 @@ while(True):
             st[i].showall()
 ##sh=StudentHandler()
 ##st=sh.sort(st)
+    userch=input("\n Enter Y to continue or Press anykey to exit.")
+    if userch=='Y' or userch=='y':
+        continue
+    else:
+        sys.exit()
+    
 
