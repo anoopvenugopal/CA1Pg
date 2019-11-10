@@ -1,34 +1,39 @@
 import time
-import math
+import sys
 import re
-st=list()
+
 class StudentRec:    
     def __init__(self,stId,stname,coursecode):
         self.stId=stId
         self.stname=stname
         self.coursecode=coursecode    
         
-    def showall(self):
+    def showall(self):                 #to view all students          
         print(self.stId,end='\t\t')
         print(self.stname,end='\t\t')
         print(self.coursecode)
-
+# manipulation
 class StudentHandler:
 
-    def add(self,student):
+    def add(self,student):             #appending data to list
         st.append(student)
         
-    def sort(self,st):
+    def sort(self,st):                 #bubble sort for sorting
         for i in range(len(st)):
             for j in range(i+1,len(st)):
                 if(int(st[i].stId)>int(st[j].stId)):
                     st[i],st[j]=st[j],st[i]
         return st
+    
+    def retrieve(self):                #remove the student having lowest IdNo 
+        fStd=st[0]
+        st.pop(0)
+        return fStd
         
-
+st=list()
 stud=StudentHandler()
 while(True):
-    choice=int(input(" 1: To add students\n 2: View all students\n 3:See the latest entry"))
+    choice=int(input(" 1: Press 1 to add students.\n 2: Press 2 to View all students.\n 3: Press 3 to pop the student with lowest ID.\n"))
     if choice==1:
         n=int(input('Enter no of students : '))
         
@@ -51,22 +56,38 @@ while(True):
                 coursecode=input('\tCourseCode:')
             std=(StudentRec(stId,stname,coursecode))
             stud.add(std)
-        #sh=StudentHandler()
+        print('Successfuly added students to Record')
         #start=time.time()
-        st=stud.sort(st)
+        #st=stud.sort(st)
         #print(time.time()-start)
-        print()
-    elif choice==2:
-        print('Student Information')
-        print('ID\t\tName\t\tCourseCode')
-        for i in range(len(st)):
-            st[i].showall()
-##sh=StudentHandler()
-##st=sh.sort(st)
+        
+    elif choice==2:                 # for showall data
+        st=stud.sort(st)
+        if (len(st)==0):
+            print('****List empty****')
+        else:
+            print('Student Information')
+            print('ID\t\tName\t\tCourseCode')
+            for i in range(len(st)):
+                st[i].showall()
+    elif choice==3:
+        st=stud.sort(st)
+        if (len(st)==0):
+            print('****List empty****')
+        else:
+            a=stud.retrieve()
+            print(' Id :'+a.stId+'\tName :'+a.stname+'\tCoursecode :'+a.coursecode)
+            print('\nNew updated list\n')
+            print('ID\t\tName\t\tCourseCode')
+            for i in range(len(st)):
+                st[i].showall()
+            
+
     userch=input("\n Enter Y to continue or Press anykey to exit.")
     if userch=='Y' or userch=='y':
         continue
     else:
+        print('Bye')
         sys.exit()
     
 
