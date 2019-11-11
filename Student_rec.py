@@ -42,7 +42,7 @@ class StudentHandler:
 st=list()
 stud=StudentHandler()
 while(True):
-    choice=int(input(" 1: Press 1 to add students.\n 2: Press 2 to View all students.\n 3: Press 3 to pop the student with lowest ID.\n"))
+    choice=int(input(" 1: Press 1 to add students.\n 2: Press 2 to View all students.\n 3: Press 3 to pop the student with lowest ID.\n 4: exit.\n"))
     if choice==1:
         n=int(input('Enter no of students : '))
         
@@ -87,6 +87,12 @@ while(True):
             print('Student Id\t\tName\t\tCourse Code')
             for i in range(len(st)):
                 st[i].showall()
+
+    elif choice==4:
+    	print('Bye')
+    	sys.exit()
+    else:
+    	print('\ninvalid option\n')
             
 
     userch=input("\n Enter Y to continue or Press anykey to exit.")
